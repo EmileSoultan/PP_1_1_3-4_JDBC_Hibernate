@@ -10,14 +10,14 @@ import java.util.List;
 public class UserDaoJDBCImpl implements UserDao {
     private static final UserDaoJDBCImpl INSTANCE = new UserDaoJDBCImpl();
     private static final String GET_ALL_USERS_SQL = """
-                SELECT * from users
+            SELECT * from users
                 """;
     private static final String REMOVE_USER_BY_ID_SQL = """
             DELETE FROM users
             WHERE id = ?
             """;
     private static final String SAVE_USER_SQL = """
-            INSERT INTO users(name, last_name, age) 
+            INSERT INTO users(name, last_name, age)
             VALUES (?, ?, ?);
             """;
     private static final String CREATE_TABLE_SQL = """ 
@@ -31,7 +31,7 @@ public class UserDaoJDBCImpl implements UserDao {
             DROP TABLE IF EXISTS users
             """;
     private static final String CLEAN_ALL_USERS_SQL = """
-            DELETE FROM users 
+            DELETE FROM users
             """;
 
     public UserDaoJDBCImpl() {
@@ -73,7 +73,7 @@ public class UserDaoJDBCImpl implements UserDao {
             preparedStatement.setString(2, lastName);
             preparedStatement.setByte(3, age);
             preparedStatement.executeUpdate();
-            System.out.println("The user has been saved!");
+            System.out.println("User с именем " + name + " добавлен в базу данных");
         } catch (SQLException sqlException) {
             throw new RuntimeException();
         }
@@ -101,7 +101,10 @@ public class UserDaoJDBCImpl implements UserDao {
                 String name = resultSet.getString( "name");
                 String lastName = resultSet.getNString("last_name");
                 Byte age = resultSet.getByte("age");
-                userList.add(new User(name, lastName, age) );
+                userList.add(new User(name, lastName, age));
+            }
+            for (User user : userList) {
+                System.out.println(user);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
