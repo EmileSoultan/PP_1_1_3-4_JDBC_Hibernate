@@ -3,16 +3,19 @@ package jm.task.core.jdbc;
 import jm.task.core.jdbc.dao.UserDao;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class Main {
     public static void main(String[] args) {
-        // реализуйте алгоритм здесь
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         UserDao userDao = UserDaoJDBCImpl.getInstance();
         userDao.createUsersTable();
-        userDao.saveUser("Федор", "Иванов", (byte) 32);
-        userDao.saveUser("Евгений", "Смирнов", (byte) 42);
-        userDao.saveUser("Елена", "Котова", (byte) 22);
-        userDao.saveUser("Ирина", "Байкова", (byte) 25);
+        userDao.saveUser("РРІР°РЅ", "РЎРјРёСЂРЅРѕРІ", (byte) 32);
+        userDao.saveUser("Р“Р°Р»РёРЅР°", "РРІР°РЅРѕРІР°", (byte) 42);
+        userDao.saveUser("Р”РјРёС‚СЂРёР№", "Р¤СЂРѕР»РѕРІ", (byte) 22);
+        userDao.saveUser("Р–Р°РЅРЅР°", "РЎРёРґРѕСЂРѕРІР°", (byte) 25);
         userDao.getAllUsers();
         userDao.cleanUsersTable();
         userDao.dropUsersTable();
