@@ -33,11 +33,8 @@ public class UserDaoJDBCImpl implements UserDao {
     private static final String CLEAN_ALL_USERS_SQL = """
             DELETE FROM users
             """;
-
     public UserDaoJDBCImpl() {
-
     }
-
     public static UserDaoJDBCImpl getInstance() {
         return INSTANCE;
     }
@@ -51,9 +48,7 @@ public class UserDaoJDBCImpl implements UserDao {
             System.out.println("Connection failed...");
             throw new RuntimeException();
         }
-
     }
-
     public void dropUsersTable() {
         try (var connection = Util.open();
              var Statement = connection.createStatement()) {
@@ -63,9 +58,7 @@ public class UserDaoJDBCImpl implements UserDao {
             System.out.println("Connection failed...");
             throw new RuntimeException();
         }
-
     }
-
     public void saveUser(String name, String lastName, byte age) {
         try (var connection = Util.open();
              var preparedStatement = connection.prepareStatement(SAVE_USER_SQL)) {
@@ -73,12 +66,11 @@ public class UserDaoJDBCImpl implements UserDao {
             preparedStatement.setString(2, lastName);
             preparedStatement.setByte(3, age);
             preparedStatement.executeUpdate();
-            System.out.println("User с именем " + name + " добавлен в базу данных");
+            System.out.println("User СЃ РёРјРµРЅРµРј " + name + " РґРѕР±Р°РІР»РµРЅ РІ Р±Р°Р·Сѓ РґР°РЅРЅС‹С…");
         } catch (SQLException sqlException) {
             throw new RuntimeException();
         }
     }
-
     @Override
     public void removeUserById(long id) {
         try (var connection = Util.open();
@@ -90,7 +82,6 @@ public class UserDaoJDBCImpl implements UserDao {
             throw new RuntimeException();
         }
     }
-
     public List<User> getAllUsers() {
         List<User> userList = new ArrayList<>();
         try (var connection = Util.open();
@@ -111,7 +102,6 @@ public class UserDaoJDBCImpl implements UserDao {
         }
         return userList;
     }
-
     public void cleanUsersTable() {
         try (var connection = Util.open();
              var preparedStatement = connection.prepareStatement(CLEAN_ALL_USERS_SQL)) {
@@ -120,6 +110,5 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException sqlException) {
             throw new RuntimeException();
         }
-
     }
 }
