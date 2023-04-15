@@ -48,7 +48,7 @@ public class UserDaoHibernateImpl implements UserDao {
         Transaction transaction = null;
         try (var session = HibernateUtil.buildSessionFactory().getCurrentSession()) {
             transaction = session.beginTransaction();
-            session.createNativeQuery(CREATE_TABLE_SQL).executeUpdate();
+            session.createNativeQuery(CREATE_TABLE_SQL, User.class).executeUpdate();
             transaction.commit();
             System.out.println("Таблица создана!");
         } catch (HibernateException hqlException) {
@@ -64,7 +64,7 @@ public class UserDaoHibernateImpl implements UserDao {
         Transaction transaction = null;
         try (var session = HibernateUtil.buildSessionFactory().getCurrentSession()) {
             transaction = session.beginTransaction();
-            session.createNativeQuery(DROP_TABLE_SQL).executeUpdate();
+            session.createNativeQuery(DROP_TABLE_SQL, User.class).executeUpdate();
             transaction.commit();
             System.out.println("Таблица удалена!");
         } catch (HibernateException hqlException) {
@@ -80,7 +80,7 @@ public class UserDaoHibernateImpl implements UserDao {
         Transaction transaction = null;
         try (var session = HibernateUtil.buildSessionFactory().getCurrentSession()) {
             transaction = session.beginTransaction();
-            session.createNativeQuery(SAVE_USER_SQL)
+            session.createNativeQuery(SAVE_USER_SQL, User.class)
                     .setParameter(1, name).setParameter(2, lastName)
                     .setParameter(3, age).executeUpdate();
             transaction.commit();
@@ -99,7 +99,7 @@ public class UserDaoHibernateImpl implements UserDao {
         try (var session = HibernateUtil.buildSessionFactory().getCurrentSession()) {
             transaction = session.beginTransaction();
             if (id != 0) {
-            session.createNativeQuery(REMOVE_USER_BY_ID_SQL)
+            session.createNativeQuery(REMOVE_USER_BY_ID_SQL, User.class)
                     .setParameter(1, id).executeUpdate();
             transaction.commit();
             }
